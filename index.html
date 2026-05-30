@@ -271,10 +271,10 @@
         .radio-label:hover { background: var(--pastel-pink); }
         .radio-label input { accent-color: var(--coffee-brown); width: 18px; height: 18px;}
         #outfit-feedback {
-            color: #4E9A51;
             font-weight: bold;
             margin-top: 15px;
             min-height: 24px;
+            transition: color 0.2s ease;
         }
 
         /* --- SCREEN 7 SPECIFIC (EMERGENCY) --- */
@@ -459,13 +459,13 @@
         
         <div class="radio-group">
             <label class="radio-label">
-                <input type="radio" name="outfit" value="cute" onclick="selectOutfit()"> Cute Outfit
+                <input type="radio" name="outfit" value="cute" onclick="selectOutfit('cute')"> Cute Outfit
             </label>
             <label class="radio-label">
-                <input type="radio" name="outfit" value="very-cute" onclick="selectOutfit()"> Very Cute Outfit
+                <input type="radio" name="outfit" value="very-cute" onclick="selectOutfit('very-cute')"> Very Cute Outfit
             </label>
             <label class="radio-label">
-                <input type="radio" name="outfit" value="ext-cute" onclick="selectOutfit()"> Extremely Cute Outfit
+                <input type="radio" name="outfit" value="ext-cute" onclick="selectOutfit('ext-cute')"> Extremely Cute Outfit
             </label>
         </div>
         <div id="outfit-feedback"></div>
@@ -637,10 +637,23 @@
         }
 
         // --- PAGE 6: OUTFIT SELECTOR FEEDBACK ---
-        function selectOutfit() {
+        function selectOutfit(choice) {
             const feedback = document.getElementById('outfit-feedback');
-            feedback.innerText = "Excellent choice. Approval granted. ✅";
-            document.getElementById('outfit-next').style.display = 'inline-flex';
+            const nextBtn = document.getElementById('outfit-next');
+            
+            if (choice === 'cute') {
+                feedback.innerText = "Oops! This is the usual you, try another. 🤭";
+                feedback.style.color = "#C05C64"; // Soft playful dark red/pink
+                nextBtn.style.display = 'none';
+            } else if (choice === 'very-cute') {
+                feedback.innerText = "Would have worked but since it is our very first date so No! 🙅‍♂️";
+                feedback.style.color = "#C05C64";
+                nextBtn.style.display = 'none';
+            } else if (choice === 'ext-cute') {
+                feedback.innerText = "Excellent choice. Approval granted. ✅";
+                feedback.style.color = "#4E9A51"; // Minty green approval color
+                nextBtn.style.display = 'inline-flex';
+            }
         }
 
         // --- PAGE 7: POPUP DIALOG TRIGGERS ---
