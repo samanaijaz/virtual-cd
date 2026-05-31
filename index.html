@@ -1,762 +1,1521 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>A Special Invitation ✨</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
     
+
     <style>
+
         /* --- CSS VARIABLES & THEME --- */
+
         :root {
+
             --bg-cream: #FDFBF7;
+
             --pastel-pink: #FFECEF;
+
             --coffee-brown: #6F4E37;
+
             --coffee-light: #B68D74;
+
             --text-dark: #4A3525;
+
             --mint-green: #A8E6CF;
+
             --font-handwritten: 'Fredoka', sans-serif;
+
             --font-body: 'Quicksand', sans-serif;
+
         }
+
+
 
         * {
+
             box-sizing: border-box;
+
             margin: 0;
+
             padding: 0;
+
             -webkit-tap-highlight-color: transparent;
+
         }
+
+
 
         body {
+
             font-family: var(--font-body);
+
             background-color: var(--bg-cream);
+
             color: var(--text-dark);
+
             overflow-x: hidden;
+
             min-height: 100vh;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             position: relative;
+
         }
+
+
 
         /* --- BACKGROUND DOODLES --- */
+
         .bg-doodles {
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
+
             pointer-events: none;
+
             z-index: 1;
+
         }
+
+
 
         .doodle {
+
             position: absolute;
+
             font-size: 1.5rem;
+
             opacity: 0.6;
+
             animation: float 6s ease-in-out infinite;
+
             cursor: pointer;
+
             pointer-events: auto; /* Allows easter eggs to be clicked */
+
             user-select: none;
+
         }
+
+
 
         @keyframes float {
+
             0%, 100% { transform: translateY(0) rotate(0deg); }
+
             50% { transform: translateY(-15px) rotate(10deg); }
+
         }
+
+
 
         /* --- GLOBAL SCREEN STYLING --- */
+
         .screen {
+
             position: absolute;
+
             width: 90%;
+
             max-width: 480px;
+
             background: rgba(255, 255, 255, 0.85);
+
             backdrop-filter: blur(8px);
+
             border: 3px dashed var(--coffee-light);
+
             border-radius: 24px;
+
             padding: 30px 20px;
+
             text-align: center;
+
             box-shadow: 0 8px 24px rgba(111, 78, 55, 0.05);
+
             z-index: 10;
+
             opacity: 0;
+
             transform: scale(0.9) translateY(20px);
+
             pointer-events: none;
+
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
             display: none;
+
         }
+
+
 
         .screen.active {
+
             display: block;
+
             opacity: 1;
+
             transform: scale(1) translateY(0);
+
             pointer-events: auto;
+
         }
+
+
 
         h1, h2, h3, .title-font {
+
             font-family: var(--font-handwritten);
+
             color: var(--coffee-brown);
+
             margin-bottom: 15px;
+
         }
+
+
 
         p {
+
             font-size: 1.1rem;
+
             line-height: 1.6;
+
             margin-bottom: 20px;
+
             color: var(--text-dark);
+
             font-weight: 500;
+
         }
+
+
 
         /* --- BUTTONS --- */
+
         .btn {
+
             font-family: var(--font-handwritten);
+
             font-size: 1.1rem;
+
             padding: 12px 28px;
+
             border: 2px solid var(--coffee-brown);
+
             border-radius: 50px;
+
             background: #fff;
+
             color: var(--coffee-brown);
+
             cursor: pointer;
+
             transition: all 0.2s ease;
+
             box-shadow: 0 4px 0 var(--coffee-brown);
+
             display: inline-flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 8px;
+
             margin-top: 15px;
+
             text-decoration: none;
+
         }
+
+
 
         .btn:hover {
+
             transform: translateY(-2px);
+
             box-shadow: 0 6px 0 var(--coffee-brown);
+
         }
+
+
 
         .btn:active {
+
             transform: translateY(2px);
+
             box-shadow: 0 2px 0 var(--coffee-brown);
+
         }
+
+
 
         .btn-primary {
+
             background-color: var(--pastel-pink);
+
         }
+
+
 
         /* --- SCREEN 1 SPECIFIC --- */
+
         .btn-yes {
+
             background-color: var(--mint-green);
+
             min-width: 100px;
+
         }
+
         .btn-no {
+
             background-color: #FFB3B3;
+
             position: absolute;
+
             min-width: 100px;
+
             transition: all 0.15s ease-out;
+
             z-index: 999;
+
         }
+
         .button-container {
+
             position: relative;
+
             height: 80px;
+
             margin-top: 20px;
+
         }
+
+
 
         /* --- SCREEN 2 SPECIFIC (MISSION DETAILS) --- */
+
         .card {
+
             background: #fff;
+
             border: 2px solid var(--coffee-light);
+
             border-radius: 16px;
+
             padding: 20px;
+
             margin: 20px 0;
+
             text-align: left;
+
         }
+
         .card-item {
+
             display: flex;
+
             align-items: center;
+
             gap: 12px;
+
             margin-bottom: 12px;
+
             font-size: 1.05rem;
+
         }
+
         .card-item:last-child { margin-bottom: 0; }
 
+
+
         /* --- SCREEN 3 SPECIFIC (CERTIFICATE) --- */
+
         .certificate {
+
             background: #FFFDF9;
+
             border: 6px double var(--coffee-brown);
+
             padding: 25px 15px;
+
             border-radius: 12px;
+
             position: relative;
+
         }
+
         .cert-title {
+
             font-size: 1.3rem;
+
             border-bottom: 2px dashed var(--coffee-light);
+
             padding-bottom: 10px;
+
             margin-bottom: 15px;
+
         }
+
         .cert-name {
+
             font-size: 1.6rem;
+
             color: #C05C64;
+
             font-weight: bold;
+
             margin: 10px 0;
+
         }
+
+
 
         /* --- SCREEN 4 SPECIFIC (REASONS) --- */
+
         .reasons-list {
+
             list-style: none;
+
             text-align: left;
+
         }
+
         .reasons-list li {
+
             padding: 10px;
+
             background: #fff;
+
             margin-bottom: 10px;
+
             border-radius: 10px;
+
             border-left: 4px solid var(--coffee-light);
+
             transform: translateX(-20px);
+
             opacity: 0;
+
             transition: all 0.4s ease;
+
         }
+
         .screen.active .reasons-list li {
+
             transform: translateX(0);
+
             opacity: 1;
+
         }
+
+
 
         /* --- SCREEN 5 SPECIFIC (PROGRESS BAR) --- */
+
         .progress-container {
+
             width: 100%;
+
             background: #EFEFEF;
+
             border-radius: 20px;
+
             height: 24px;
+
             overflow: hidden;
+
             border: 2px solid var(--coffee-brown);
+
             margin: 20px 0;
+
         }
+
         .progress-bar {
+
             width: 0%;
+
             height: 100%;
+
             background: var(--mint-green);
+
             transition: width linear;
+
         }
+
         .loading-text {
+
             font-style: italic;
+
             height: 25px;
+
             color: #777;
+
         }
+
         .compatibility-result {
+
             display: none;
+
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
         }
+
         .big-number {
+
             font-size: 4.5rem;
+
             font-family: var(--font-handwritten);
+
             color: #C05C64;
+
         }
+
+
 
         /* --- SCREEN 6 SPECIFIC (OUTFIT FORM) --- */
+
         .radio-group {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 12px;
+
             margin: 20px 0;
+
         }
+
         .radio-label {
+
             background: white;
+
             border: 2px solid var(--coffee-light);
+
             padding: 12px;
+
             border-radius: 12px;
+
             cursor: pointer;
+
             display: flex;
+
             align-items: center;
+
             gap: 10px;
+
             font-weight: 500;
+
             transition: background 0.2s;
+
         }
+
         .radio-label:hover { background: var(--pastel-pink); }
+
         .radio-label input { accent-color: var(--coffee-brown); width: 18px; height: 18px;}
+
         #outfit-feedback {
+
             font-weight: bold;
+
             margin-top: 15px;
+
             min-height: 24px;
+
             transition: color 0.2s ease;
+
         }
+
+
 
         /* --- SCREEN 7 SPECIFIC (EMERGENCY) --- */
+
         .btn-emergency {
+
             background-color: #FF4D4D;
+
             color: white;
+
             font-size: 1.5rem;
+
             padding: 20px 40px;
+
             box-shadow: 0 6px 0 #b32424;
+
         }
+
         .btn-emergency:hover { box-shadow: 0 8px 0 #b32424; }
+
         .popup-overlay {
+
             position: fixed;
+
             top: 0; left: 0; width: 100%; height: 100%;
+
             background: rgba(0,0,0,0.5);
+
             display: none;
+
             justify-content: center;
+
             align-items: center;
+
             z-index: 2000;
+
         }
+
         .popup {
+
             background: white;
+
             padding: 30px;
+
             border-radius: 20px;
+
             border: 4px solid #FF4D4D;
+
             text-align: center;
+
             max-width: 90%;
+
             width: 350px;
+
             animation: shake 0.5s infinite;
+
         }
+
+
 
         /* --- FINAL SCREEN (COUNTDOWN) --- */
+
         .countdown-container {
+
             display: flex;
+
             justify-content: space-around;
+
             margin-top: 20px;
+
             background: white;
+
             padding: 15px 10px;
+
             border-radius: 15px;
+
             border: 2px dashed var(--coffee-light);
+
         }
+
         .time-box {
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
         }
+
         .time-box span:first-child {
+
             font-size: 1.8rem;
+
             font-family: var(--font-handwritten);
+
             color: var(--coffee-brown);
+
         }
+
         .time-box span:last-child {
+
             font-size: 0.75rem;
+
             text-transform: uppercase;
+
             color: #888;
+
         }
+
+
 
         /* --- EASTER EGG TOAST --- */
+
         .toast {
+
             position: fixed;
+
             bottom: 20px;
+
             background: var(--text-dark);
+
             color: white;
+
             padding: 10px 20px;
+
             border-radius: 30px;
+
             font-size: 0.9rem;
+
             opacity: 0;
+
             transition: opacity 0.3s;
+
             z-index: 9999;
+
             pointer-events: none;
+
         }
+
+
 
         /* --- CONFETTI CANVAS --- */
+
         #confetti-canvas {
+
             position: fixed;
+
             top:0; left:0; width:100%; height:100%;
+
             pointer-events: none;
+
             z-index: 1000;
+
         }
 
+
+
         /* --- ANIMATIONS --- */
+
         @keyframes shake {
+
             0% { transform: translate(1px, 1px) rotate(0deg); }
+
             10% { transform: translate(-1px, -2px) rotate(-1deg); }
+
             20% { transform: translate(-3px, 0px) rotate(1deg); }
+
             30% { transform: translate(0px, 2px) rotate(0deg); }
+
             40% { transform: translate(1px, -1px) rotate(1deg); }
+
             50% { transform: translate(-1px, 2px) rotate(-1deg); }
+
             60% { transform: translate(-3px, 1px) rotate(0deg); }
+
             70% { transform: translate(2px, 1px) rotate(-1deg); }
+
             80% { transform: translate(-1px, -1px) rotate(1deg); }
+
             90% { transform: translate(2px, 2px) rotate(0deg); }
+
             100% { transform: translate(1px, -2px) rotate(-1deg); }
+
         }
+
         @keyframes popIn {
+
             0% { transform: scale(0.5); opacity: 0; }
+
             100% { transform: scale(1); opacity: 1; }
+
         }
+
     </style>
+
 </head>
+
 <body>
+
+
 
     <canvas id="confetti-canvas"></canvas>
 
+
+
     <div class="bg-doodles" id="doodle-container"></div>
 
-    <!-- PAGE 1: INVITATION -->
+
+
     <div class="screen active" id="page-1">
+
         <div style="font-size: 3.5rem;">☕</div>
+
         <h1>Hii Umam ✨</h1>
+
         <p>I would like to formally invite you on a virtual coffee date.</p>
+
         <p style="font-family: var(--font-handwritten); font-size: 1.4rem;">Will you come?</p>
+
         
+
         <div class="button-container">
+
             <button class="btn btn-yes" onclick="acceptInvitation()">YES</button>
+
             <button class="btn btn-no" id="no-button">NO</button>
+
         </div>
+
     </div>
 
-    <!-- PAGE 2: CONFIRMATION -->
+
+
     <div class="screen" id="page-2">
+
         <h1 style="font-size: 2.5rem;">🎉 Yayyyyy!</h1>
-        <p>Your mission, should you choose to accept it: Find a cozy corner, order your fuel of choice, and look unreasonably good doing it. ✨</p>
+
+        <p>Please proceed to the nearest cozy cafe, order a coffee, and try your absolute best not to distract me with your face. 😉</p>
+
         
+
         <div class="card">
+
             <h3 style="margin-bottom: 10px; text-align: center;">📝 Mission Details</h3>
+
             <div class="card-item"><span>📅</span> <span>Saturday, 6th June 2026</span></div>
+
             <div class="card-item"><span>⏰</span> <span>7 PM</span></div>
+
             <div class="card-item"><span>☕</span> <span>Coffee or food of your choice</span></div>
+
             <div class="card-item"><span>📹</span> <span>Video Call Mandatory</span></div>
+
             <div class="card-item"><span>💬</span> <span>Unlimited conversation</span></div>
+
         </div>
+
         <p style="font-size: 0.9rem; font-style: italic; color: #777;">Long Distance approved this message.</p>
+
         <button class="btn btn-primary" onclick="nextPage(3)">Proceed to official confirmation</button>
+
     </div>
 
-    <!-- PAGE 3: CERTIFICATE -->
+
+
     <div class="screen" id="page-3">
+
         <div class="certificate">
+
             <div class="cert-title">Virtual Coffee Date Confirmation Certificate</div>
+
             <p style="margin-bottom: 5px; font-style: italic;">This certifies that</p>
+
             <div class="cert-name">Mr. Umam Siddiqui</div>
+
             <p style="margin-bottom: 5px; font-style: italic;">has officially agreed to spend quality time with</p>
+
             <h3 style="color: var(--coffee-brown);">Ms. Saman Siddiqui</h3>
+
             <p style="margin-bottom: 0; margin-top: 15px;">on a virtual coffee date.</p>
+
             <div style="margin-top: 15px; font-size: 0.85rem; border-top: 1px dashed #ccc; padding-top: 10px;">
+
                 <strong>Validity:</strong> Lifetime (subject to renewal after every date 😂)
+
             </div>
+
             <div style="font-size: 1.2rem; margin-top: 10px;">☕ ⭐ 📜 ⭐ ☕</div>
+
         </div>
+
         <button class="btn btn-primary" onclick="nextPage(4)">View Invitation Notes</button>
+
     </div>
 
-    <!-- PAGE 4: REASONS -->
+
+
     <div class="screen" id="page-4">
+
         <h2>Reason for invitation</h2>
+
         <ul class="reasons-list" id="reasons-list">
+
             <li>☕ I love and miss talking to you.</li>
+
             <li>☕ You owe me a date.</li>
-            <li>☕ Because it is time for a spin-off from our usual movie date routine. 🎬🍿</li>
-            <li>☕ To conduct a highly critical, unsolicited audit of your current wardrobe choices.</li>
+
+            <li>☕ To make sure you actually put some effort into looking nice for me.</li>
+
             <li>☕ Scientific research suggests spending time with you improves my mood.</li>
+
             <li>☕ Talking to you is one of my favourite parts of the day.</li>
+
         </ul>
+
         <button class="btn btn-primary" onclick="startCompatibilityTest()">Run Compatibility Test</button>
+
     </div>
 
-    <!-- PAGE 5: COMPATIBILITY -->
+
+
     <div class="screen" id="page-5">
+
         <h2>Compatibility Analyzer</h2>
+
         <div id="loader-view">
+
             <div class="progress-container">
+
                 <div class="progress-bar" id="progress-bar"></div>
+
             </div>
+
             <div class="loading-text" id="loading-text">Initializing parameters...</div>
+
         </div>
+
+
 
         <div class="compatibility-result" id="compatibility-result">
+
             <div class="big-number">99%</div>
-            <p><strong>Reason for missing 1%:</strong><br>Still haven't been on our first official date together.</p>
+
+            <p><strong>Reason for missing 1%:</strong><br>Still haven't had coffee date together.</p>
+
             <button class="btn btn-primary" onclick="nextPage(6)">Outfit Declaration Form</button>
+
         </div>
+
     </div>
 
-    <!-- PAGE 6: OUTFIT DECLARATION -->
+
+
     <div class="screen" id="page-6">
+
         <h2>Outfit Declaration</h2>
+
         <p>What will you wear on the date?</p>
+
         
+
         <div class="radio-group">
+
             <label class="radio-label">
+
                 <input type="radio" name="outfit" value="cute" onclick="selectOutfit('cute')"> Cute Outfit
+
             </label>
+
             <label class="radio-label">
+
                 <input type="radio" name="outfit" value="very-cute" onclick="selectOutfit('very-cute')"> Very Cute Outfit
+
             </label>
+
             <label class="radio-label">
+
                 <input type="radio" name="outfit" value="ext-cute" onclick="selectOutfit('ext-cute')"> Extremely Cute Outfit
+
             </label>
+
         </div>
+
         <div id="outfit-feedback"></div>
+
         <button class="btn btn-primary" id="outfit-next" style="display:none;" onclick="nextPage(7)">Emergency Button</button>
+
     </div>
 
-    <!-- PAGE 7: EMERGENCY BUTTON -->
+
+
     <div class="screen" id="page-7">
+
         <h2>In Case of Urgency</h2>
+
         <p>If things get a little too overwhelming, interact here.</p>
+
         <button class="btn btn-emergency" onclick="triggerEmergency()">🚨 Emergency Button</button>
+
         <br><br>
-        <button class="btn btn-primary" onclick="nextPage(8)">One Last Thing... 💖</button>
+
+        <button class="btn btn-primary" onclick="nextPage(8)">Final Screen</button>
+
     </div>
 
-    <!-- EMERGENCY POPUP -->
+
+
     <div class="popup-overlay" id="emergency-popup">
+
         <div class="popup">
+
             <h2 style="color: #FF4D4D;">⚠️ Warning!</h2>
-            <p>In case of severe missing-you symptoms, a Hyderabad trip must be initiated without prior notice. ✈️🧳</p>
+
+            <p>In case of severe missing-you symptoms, a Hyderabad Visit must be initiated without prior notice. ✈️🧳</p>
+
             <button class="btn" onclick="closeEmergency()">Got it!</button>
+
         </div>
+
     </div>
 
-    <!-- FINAL PAGE -->
+
+
     <div class="screen" id="page-8">
+
         <div style="font-size: 2.5rem; margin-bottom: 10px;">☕✨</div>
+
         <h2>Looking forward to our coffee date.</h2>
-        <p style="font-family: var(--font-handwritten); font-size: 1.4rem;">See you soon.</p>
+
+        <p style="font-family: var(--font-handwritten); font-size: 1.4rem;">See you soon Umam <3.</p>
+
         <p style="text-align: right; font-style: italic; font-weight: bold; padding-right: 20px;">Signed,<br>Saman</p>
+
         
+
         <div class="countdown-container">
+
             <div class="time-box"><span id="days">00</span><span>Days</span></div>
+
             <div class="time-box"><span id="hours">00</span><span>Hours</span></div>
+
             <div class="time-box"><span id="minutes">00</span><span>Mins</span></div>
+
             <div class="time-box"><span id="seconds">00</span><span>Secs</span></div>
+
         </div>
+
     </div>
+
+
 
     <div class="toast" id="toast"></div>
 
+
+
     <script>
+
         // --- MULTI-PAGE NAVIGATION CONFIG ---
+
         let currentScreen = 1;
 
+
+
         function nextPage(pageNumber) {
+
             document.querySelector(`#page-${currentScreen}`).classList.remove('active');
+
             setTimeout(() => {
+
                 document.querySelector(`#page-${currentScreen}`).style.display = 'none';
+
                 currentScreen = pageNumber;
+
                 const nextView = document.querySelector(`#page-${pageNumber}`);
+
                 nextView.style.display = 'block';
+
+                // Trigger a tiny reflow calculation to make transition register cleanly
+
                 nextView.offsetHeight; 
+
                 nextView.classList.add('active');
+
                 
+
+                // Specific page entry logic
+
                 if(pageNumber === 4) {
+
                     animateReasons();
+
                 }
+
             }, 400);
+
         }
+
+
 
         // --- BACKGROUND DOODLE BUILDER & EASTER EGGS ---
+
         const doodleTypes = [
+
             { icon: '☕', egg: 'Extra caffeine unlocked. ☕⚡' },
+
             { icon: '⭐', egg: 'Sparkle mode fully engaged! ✨' },
+
             { icon: '💖', egg: 'Pink heart unlocked: Wholesome levels increasing!' },
+
             { icon: '💙', egg: 'Blue heart unlocked: Cozy vibes detected!' },
+
             { icon: '✨', egg: 'You found a tiny piece of magic.' },
+
             { icon: '✈️', egg: 'BLR-HYD travel route detected. 🗺️' },
+
             { icon: '🌻', egg: 'A bright sunflower to make you smile! 🌻💛' }
+
         ];
 
+
+
         const container = document.getElementById('doodle-container');
+
         const numDoodles = 25;
 
+
+
         for (let i = 0; i < numDoodles; i++) {
+
             const doodleData = doodleTypes[Math.floor(Math.random() * doodleTypes.length)];
+
             const div = document.createElement('div');
+
             div.className = 'doodle';
+
             div.innerText = doodleData.icon;
+
             div.style.left = Math.random() * 92 + '%';
+
             div.style.top = Math.random() * 92 + '%';
+
+            // Variable animation timings for dynamic fluidity
+
             div.style.animationDelay = Math.random() * 5 + 's';
+
             div.style.animationDuration = (Math.random() * 4 + 4) + 's';
+
             
+
+            // Registering Easter egg trigger
+
             div.addEventListener('click', (e) => {
+
                 showToast(doodleData.egg);
+
+                // Fun bouncy visual response on tap
+
                 div.style.transform = 'scale(1.6)';
+
                 setTimeout(() => div.style.transform = '', 300);
+
             });
+
+
 
             container.appendChild(div);
+
         }
+
+
 
         function showToast(message) {
+
             const toast = document.getElementById('toast');
+
             toast.innerText = message;
+
             toast.style.opacity = '1';
+
             setTimeout(() => { toast.style.opacity = '0'; }, 2500);
+
         }
+
+
 
         // --- PAGE 1: PRANK "NO" BUTTON LOGIC ---
+
         const noBtn = document.getElementById('no-button');
+
         
+
         function moveNoButton() {
+
+            // Constrain movement inside viewport bounds minus buffer bounds
+
             const x = Math.random() * (window.innerWidth - 120);
+
             const y = Math.random() * (window.innerHeight - 60);
+
             noBtn.style.position = 'fixed';
+
             noBtn.style.left = x + 'px';
+
             noBtn.style.top = y + 'px';
+
         }
+
         
+
         noBtn.addEventListener('mouseenter', moveNoButton);
+
         noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); 
+
+            e.preventDefault(); // Stop instant tapping behaviors on mobile
+
             moveNoButton();
+
         });
 
+
+
         function acceptInvitation() {
+
             initConfetti();
+
             setTimeout(() => {
+
                 nextPage(2);
+
             }, 500);
+
         }
+
+
 
         // --- PAGE 4: CASCADE LIST ANIMATION ---
+
         function animateReasons() {
+
             const items = document.querySelectorAll('.reasons-list li');
+
             items.forEach((item, index) => {
+
                 item.style.transitionDelay = `${index * 0.2}s`;
+
             });
+
         }
+
+
 
         // --- PAGE 5: SIMULATED LOADER SETUP ---
+
         function startCompatibilityTest() {
+
             nextPage(5);
+
             const bar = document.getElementById('progress-bar');
+
             const txt = document.getElementById('loading-text');
+
             const loaderView = document.getElementById('loader-view');
+
             const resultView = document.getElementById('compatibility-result');
+
             
+
             bar.style.width = '0%';
+
             loaderView.style.display = 'block';
+
             resultView.style.display = 'none';
 
+
+
             const phases = [
+
                 { time: 0, text: "Calculating compatibility..." },
-                { time: 1200, text: "Upgrading system from virtual movie settings... 🎬🍿" },
+
+                { time: 1200, text: "Checking coffee preferences... ☕" },
+
                 { time: 2400, text: "Checking fashion sense... 👔" },
+
                 { time: 3600, text: "Analyzing cozy layouts... 🌻" },
+
                 { time: 4800, text: "Finalizing configurations..." }
+
             ];
 
+
+
             phases.forEach(phase => {
+
                 setTimeout(() => { txt.innerText = phase.text; }, phase.time);
+
             });
 
+
+
+            // Smooth linear visual fill setup matches the total time
+
             bar.style.transition = 'width 5s linear';
+
             setTimeout(() => { bar.style.width = '100%'; }, 50);
 
+
+
             setTimeout(() => {
+
                 loaderView.style.display = 'none';
+
                 resultView.style.display = 'block';
+
             }, 5200);
+
         }
+
+
 
         // --- PAGE 6: OUTFIT SELECTOR FEEDBACK ---
+
         function selectOutfit(choice) {
+
             const feedback = document.getElementById('outfit-feedback');
+
             const nextBtn = document.getElementById('outfit-next');
+
             
+
             if (choice === 'cute') {
-                feedback.innerText = "Denied. That's just your baseline level. Try harder! 😤";
-                feedback.style.color = "#C05C64"; 
+
+                feedback.innerText = "Oops! This is the usual you, try another. 🤭";
+
+                feedback.style.color = "#C05C64"; // Soft playful dark red/pink
+
                 nextBtn.style.display = 'none';
+
             } else if (choice === 'very-cute') {
-                feedback.innerText = "Almost approved, but we need to set a high bar for our first date. Re-evaluate! 🧐";
+
+                feedback.innerText = "Would have worked but since it is our very first date so No! 🙅‍♂️";
+
                 feedback.style.color = "#C05C64";
+
                 nextBtn.style.display = 'none';
+
             } else if (choice === 'ext-cute') {
-                feedback.innerText = "Excellent choice. Authorization granted. Print your boarding pass! ✅";
-                feedback.style.color = "#4E9A51"; 
+
+                feedback.innerText = "Excellent choice. Approval granted. ✅";
+
+                feedback.style.color = "#4E9A51"; // Minty green approval color
+
                 nextBtn.style.display = 'inline-flex';
+
             }
+
         }
+
+
 
         // --- PAGE 7: POPUP DIALOG TRIGGERS ---
+
         function triggerEmergency() {
+
             document.getElementById('emergency-popup').style.display = 'flex';
-        }
-        function closeEmergency() {
-            document.getElementById('emergency-popup').style.display = 'none';
+
         }
 
-        // --- FINAL PAGE: TARGET COUNTDOWN TIMER ---
-        function getNextSaturday7PM() {
-            const now = new Date();
-            let result = new Date();
-            result.setDate(now.getDate() + (6 - now.getDay() + 7) % 7);
-            result.setHours(19, 0, 0, 0); 
-            
-            if (result <= now) {
-                result.setDate(result.getDate() + 7);
-            }
-            return result;
+        function closeEmergency() {
+
+            document.getElementById('emergency-popup').style.display = 'none';
+
         }
+
+
+
+        // --- FINAL PAGE: TARGET COUNTDOWN TIMER ---
+
+        function getNextSaturday7PM() {
+
+            const now = new Date();
+
+            let result = new Date();
+
+            // Calculate distance to next Saturday (Day Index 6)
+
+            result.setDate(now.getDate() + (6 - now.getDay() + 7) % 7);
+
+            result.setHours(19, 0, 0, 0); // Target time 19:00 (7 PM)
+
+            
+
+            // If it's already past Saturday 7PM today, roll target forward one full week
+
+            if (result <= now) {
+
+                result.setDate(result.getDate() + 7);
+
+            }
+
+            return result;
+
+        }
+
+
 
         const targetDate = getNextSaturday7PM();
 
+
+
         function updateCountdown() {
+
             const now = new Date().getTime();
+
             const distance = targetDate - now;
 
+
+
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+
+
             document.getElementById("days").innerText = days.toString().padStart(2, '0');
+
             document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+
             document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+
         }
+
         setInterval(updateCountdown, 1000);
+
         updateCountdown();
 
+
+
         // --- LIVE CANVAS CONFETTI GRAPHICS ENGINE ---
+
         const canvas = document.getElementById('confetti-canvas');
+
         const ctx = canvas.getContext('2d');
+
         let confetti = [];
 
+
+
         function resizeCanvas() {
+
             canvas.width = window.innerWidth;
+
             canvas.height = window.innerHeight;
+
         }
+
         window.addEventListener('resize', resizeCanvas);
+
         resizeCanvas();
 
+
+
         function initConfetti() {
+
             confetti = [];
+
             const colors = ['#A8E6CF', '#FFECEF', '#B68D74', '#FFB3B3', '#FFFDF9'];
+
             for (let i = 0; i < 150; i++) {
+
                 confetti.push({
+
                     x: Math.random() * canvas.width,
+
                     y: Math.random() * canvas.height - canvas.height,
+
                     r: Math.random() * 6 + 4,
+
                     d: Math.random() * canvas.height,
+
                     color: colors[Math.floor(Math.random() * colors.length)],
+
                     tilt: Math.random() * 10 - 5,
+
                     tiltAngleIncremental: Math.random() * 0.07 + 0.02,
+
                     tiltAngle: 0
+
                 });
+
             }
+
             requestAnimationFrame(drawConfetti);
+
         }
+
+
 
         function drawConfetti() {
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
             let remaining = false;
 
+
+
             confetti.forEach((p, index) => {
+
                 p.tiltAngle += p.tiltAngleIncremental;
+
                 p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+
                 p.x += Math.sin(p.tiltAngle);
+
                 p.tilt = Math.sin(p.tiltAngle - index / 3) * 15;
 
+
+
                 if (p.y <= canvas.height) {
+
                     remaining = true;
+
                 }
 
+
+
                 ctx.beginPath();
+
                 ctx.lineWidth = p.r;
+
                 ctx.strokeStyle = p.color;
+
                 ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+
                 ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+
                 ctx.stroke();
+
             });
 
+
+
             if (remaining) {
+
                 requestAnimationFrame(drawConfetti);
+
             } else {
+
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+
             }
+
         }
+
     </script>
+
 </body>
+
 </html>
