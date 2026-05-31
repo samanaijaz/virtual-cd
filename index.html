@@ -381,6 +381,7 @@
 
     <div class="bg-doodles" id="doodle-container"></div>
 
+    <!-- PAGE 1: INVITATION -->
     <div class="screen active" id="page-1">
         <div style="font-size: 3.5rem;">☕</div>
         <h1>Hii Umam ✨</h1>
@@ -393,9 +394,10 @@
         </div>
     </div>
 
+    <!-- PAGE 2: CONFIRMATION -->
     <div class="screen" id="page-2">
         <h1 style="font-size: 2.5rem;">🎉 Yayyyyy!</h1>
-        <p>Please proceed to the nearest cozy cafe, order a coffee, and try your absolute best not to distract me with your face. 😉</p>
+        <p>Your mission, should you choose to accept it: Find a cozy corner, order your fuel of choice, and look unreasonably good doing it. ✨</p>
         
         <div class="card">
             <h3 style="margin-bottom: 10px; text-align: center;">📝 Mission Details</h3>
@@ -409,6 +411,7 @@
         <button class="btn btn-primary" onclick="nextPage(3)">Proceed to official confirmation</button>
     </div>
 
+    <!-- PAGE 3: CERTIFICATE -->
     <div class="screen" id="page-3">
         <div class="certificate">
             <div class="cert-title">Virtual Coffee Date Confirmation Certificate</div>
@@ -425,18 +428,21 @@
         <button class="btn btn-primary" onclick="nextPage(4)">View Invitation Notes</button>
     </div>
 
+    <!-- PAGE 4: REASONS -->
     <div class="screen" id="page-4">
         <h2>Reason for invitation</h2>
         <ul class="reasons-list" id="reasons-list">
             <li>☕ I love and miss talking to you.</li>
             <li>☕ You owe me a date.</li>
-            <li>☕ To make sure you actually put some effort into looking nice for me.</li>
+            <li>☕ Because it is time for a spin-off from our usual movie date routine. 🎬🍿</li>
+            <li>☕ To conduct a highly critical, unsolicited audit of your current wardrobe choices.</li>
             <li>☕ Scientific research suggests spending time with you improves my mood.</li>
             <li>☕ Talking to you is one of my favourite parts of the day.</li>
         </ul>
         <button class="btn btn-primary" onclick="startCompatibilityTest()">Run Compatibility Test</button>
     </div>
 
+    <!-- PAGE 5: COMPATIBILITY -->
     <div class="screen" id="page-5">
         <h2>Compatibility Analyzer</h2>
         <div id="loader-view">
@@ -448,11 +454,12 @@
 
         <div class="compatibility-result" id="compatibility-result">
             <div class="big-number">99%</div>
-            <p><strong>Reason for missing 1%:</strong><br>Still haven't had coffee date together.</p>
+            <p><strong>Reason for missing 1%:</strong><br>Still haven't been on our first official date together.</p>
             <button class="btn btn-primary" onclick="nextPage(6)">Outfit Declaration Form</button>
         </div>
     </div>
 
+    <!-- PAGE 6: OUTFIT DECLARATION -->
     <div class="screen" id="page-6">
         <h2>Outfit Declaration</h2>
         <p>What will you wear on the date?</p>
@@ -472,26 +479,29 @@
         <button class="btn btn-primary" id="outfit-next" style="display:none;" onclick="nextPage(7)">Emergency Button</button>
     </div>
 
+    <!-- PAGE 7: EMERGENCY BUTTON -->
     <div class="screen" id="page-7">
         <h2>In Case of Urgency</h2>
         <p>If things get a little too overwhelming, interact here.</p>
         <button class="btn btn-emergency" onclick="triggerEmergency()">🚨 Emergency Button</button>
         <br><br>
-        <button class="btn btn-primary" onclick="nextPage(8)">Final Screen</button>
+        <button class="btn btn-primary" onclick="nextPage(8)">One Last Thing... 💖</button>
     </div>
 
+    <!-- EMERGENCY POPUP -->
     <div class="popup-overlay" id="emergency-popup">
         <div class="popup">
             <h2 style="color: #FF4D4D;">⚠️ Warning!</h2>
-            <p>In case of severe missing-you symptoms, a Hyderabad Visit must be initiated without prior notice. ✈️🧳</p>
+            <p>In case of severe missing-you symptoms, a Hyderabad trip must be initiated without prior notice. ✈️🧳</p>
             <button class="btn" onclick="closeEmergency()">Got it!</button>
         </div>
     </div>
 
+    <!-- FINAL PAGE -->
     <div class="screen" id="page-8">
         <div style="font-size: 2.5rem; margin-bottom: 10px;">☕✨</div>
         <h2>Looking forward to our coffee date.</h2>
-        <p style="font-family: var(--font-handwritten); font-size: 1.4rem;">See you soon Umam <3.</p>
+        <p style="font-family: var(--font-handwritten); font-size: 1.4rem;">See you soon.</p>
         <p style="text-align: right; font-style: italic; font-weight: bold; padding-right: 20px;">Signed,<br>Saman</p>
         
         <div class="countdown-container">
@@ -515,11 +525,9 @@
                 currentScreen = pageNumber;
                 const nextView = document.querySelector(`#page-${pageNumber}`);
                 nextView.style.display = 'block';
-                // Trigger a tiny reflow calculation to make transition register cleanly
                 nextView.offsetHeight; 
                 nextView.classList.add('active');
                 
-                // Specific page entry logic
                 if(pageNumber === 4) {
                     animateReasons();
                 }
@@ -547,14 +555,11 @@
             div.innerText = doodleData.icon;
             div.style.left = Math.random() * 92 + '%';
             div.style.top = Math.random() * 92 + '%';
-            // Variable animation timings for dynamic fluidity
             div.style.animationDelay = Math.random() * 5 + 's';
             div.style.animationDuration = (Math.random() * 4 + 4) + 's';
             
-            // Registering Easter egg trigger
             div.addEventListener('click', (e) => {
                 showToast(doodleData.egg);
-                // Fun bouncy visual response on tap
                 div.style.transform = 'scale(1.6)';
                 setTimeout(() => div.style.transform = '', 300);
             });
@@ -573,7 +578,6 @@
         const noBtn = document.getElementById('no-button');
         
         function moveNoButton() {
-            // Constrain movement inside viewport bounds minus buffer bounds
             const x = Math.random() * (window.innerWidth - 120);
             const y = Math.random() * (window.innerHeight - 60);
             noBtn.style.position = 'fixed';
@@ -583,7 +587,7 @@
         
         noBtn.addEventListener('mouseenter', moveNoButton);
         noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Stop instant tapping behaviors on mobile
+            e.preventDefault(); 
             moveNoButton();
         });
 
@@ -616,7 +620,7 @@
 
             const phases = [
                 { time: 0, text: "Calculating compatibility..." },
-                { time: 1200, text: "Checking coffee preferences... ☕" },
+                { time: 1200, text: "Upgrading system from virtual movie settings... 🎬🍿" },
                 { time: 2400, text: "Checking fashion sense... 👔" },
                 { time: 3600, text: "Analyzing cozy layouts... 🌻" },
                 { time: 4800, text: "Finalizing configurations..." }
@@ -626,7 +630,6 @@
                 setTimeout(() => { txt.innerText = phase.text; }, phase.time);
             });
 
-            // Smooth linear visual fill setup matches the total time
             bar.style.transition = 'width 5s linear';
             setTimeout(() => { bar.style.width = '100%'; }, 50);
 
@@ -642,16 +645,16 @@
             const nextBtn = document.getElementById('outfit-next');
             
             if (choice === 'cute') {
-                feedback.innerText = "Oops! This is the usual you, try another. 🤭";
-                feedback.style.color = "#C05C64"; // Soft playful dark red/pink
+                feedback.innerText = "Denied. That's just your baseline level. Try harder! 😤";
+                feedback.style.color = "#C05C64"; 
                 nextBtn.style.display = 'none';
             } else if (choice === 'very-cute') {
-                feedback.innerText = "Would have worked but since it is our very first date so No! 🙅‍♂️";
+                feedback.innerText = "Almost approved, but we need to set a high bar for our first date. Re-evaluate! 🧐";
                 feedback.style.color = "#C05C64";
                 nextBtn.style.display = 'none';
             } else if (choice === 'ext-cute') {
-                feedback.innerText = "Excellent choice. Approval granted. ✅";
-                feedback.style.color = "#4E9A51"; // Minty green approval color
+                feedback.innerText = "Excellent choice. Authorization granted. Print your boarding pass! ✅";
+                feedback.style.color = "#4E9A51"; 
                 nextBtn.style.display = 'inline-flex';
             }
         }
@@ -668,11 +671,9 @@
         function getNextSaturday7PM() {
             const now = new Date();
             let result = new Date();
-            // Calculate distance to next Saturday (Day Index 6)
             result.setDate(now.getDate() + (6 - now.getDay() + 7) % 7);
-            result.setHours(19, 0, 0, 0); // Target time 19:00 (7 PM)
+            result.setHours(19, 0, 0, 0); 
             
-            // If it's already past Saturday 7PM today, roll target forward one full week
             if (result <= now) {
                 result.setDate(result.getDate() + 7);
             }
